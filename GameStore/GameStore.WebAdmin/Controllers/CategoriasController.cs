@@ -32,11 +32,21 @@ namespace GameStore.WebAdmin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crear(Categoria producto)
+        public ActionResult Crear(Categoria categoria)
         {
-            _categoriasBL.GuardarCategoria(producto);
+            if (ModelState.IsValid)
+            {
+                if (categoria.Descripcion != categoria.Descripcion.Trim())
+                {
+                    ModelState.AddModelError("Descripcion", "La descripcion no debe contener espacios al inicio o al final");
+                    return View(categoria);
+                }
+                _categoriasBL.GuardarCategoria(categoria);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View(categoria);           
         }
 
         public ActionResult Editar(int id)
@@ -47,11 +57,21 @@ namespace GameStore.WebAdmin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(Categoria producto)
+        public ActionResult Editar(Categoria categoria)
         {
-            _categoriasBL.GuardarCategoria(producto);
+            if (ModelState.IsValid)
+            {
+                if (categoria.Descripcion != categoria.Descripcion.Trim())
+                {
+                    ModelState.AddModelError("Descripcion", "La descripcion no debe contener espacios al inicio o al final");
+                    return View(categoria);
+                }
+                _categoriasBL.GuardarCategoria(categoria);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View(categoria);
         }
 
         public ActionResult Detalle(int id)
