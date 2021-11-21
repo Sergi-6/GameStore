@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace GameStore.WebAdmin.Controllers
 {
+    [Authorize]
     public class ClientesController : Controller
     {
 
